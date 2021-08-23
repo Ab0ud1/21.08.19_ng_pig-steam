@@ -6,6 +6,5 @@ export interface  User {
 
 export interface FbAuthResponse {
     idToken: string;
-    id: string;
     expiresIn: string;
 }

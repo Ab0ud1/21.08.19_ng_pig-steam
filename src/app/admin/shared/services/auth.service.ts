@@ -11,8 +11,7 @@ export class AuthService {
 
     public error$: Subject<string> = new Subject<string>();
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     get token(): string {
         const expDate = new Date(localStorage.getItem('fb-token-exp'));
@@ -22,6 +21,7 @@ export class AuthService {
         }
         return localStorage.getItem('fb-token');
     }
+
     login(user: User): Observable<any> {
         user.returnSecureToken = true;
         return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
@@ -34,7 +34,7 @@ export class AuthService {
         this.setToken(null);
     }
     isAuthenticated(): boolean {
-        return !this.token;
+        return !!this.token;
     }
     private handleError(error: HttpErrorResponse) {
         const {message} = error.error.error;
